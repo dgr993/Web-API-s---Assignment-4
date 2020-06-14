@@ -82,7 +82,7 @@ function getFormattedMinutes() {
       renderTime();
     }
 
-playButton.addEventListener("click", startTimer);
+startBtn.addEventListener("click", startTimer);
 // end of timer
 
 
