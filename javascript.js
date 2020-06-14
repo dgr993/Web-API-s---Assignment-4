@@ -28,7 +28,7 @@ function getFormattedMinutes() {
       formattedMinutes = minutesLeft;
     }
   
-    return formattedMinutes;
+    //return formattedMinutes;
   }
   
   function getFormattedSeconds() {
@@ -47,7 +47,7 @@ function getFormattedMinutes() {
 
   function setTime() {
     var minutes;
-      minutes = 2
+      minutes = 1
   
     clearInterval(interval);
     totalSeconds = minutes * 60;
