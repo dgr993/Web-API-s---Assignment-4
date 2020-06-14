@@ -1,10 +1,90 @@
-var welcomDiv= document.querySelector(".welcomePage")
-var questionsDiv = document.querySelector(".questionsDiv")
-var startBtn= document.querySelector(".startBtn")
-var questionsH1 = document.querySelector(".questions")
-var appendHere = document.querySelector(".appendHere")
-var index = 0
-var answerBtn = document.querySelector(".answerBtn")
+var welcomDiv= document.querySelector(".welcomePage");
+var questionsDiv = document.querySelector(".questionsDiv");
+var startBtn= document.querySelector(".startBtn");
+var questionsH1 = document.querySelector(".questions");
+var appendHere = document.querySelector(".appendHere");
+var answerBtn = document.querySelector(".answerBtn");
+var playButton = document.querySelector("#play");
+var minutesDisplay = document.querySelector("#minutes");
+var secondsDisplay = document.querySelector("#seconds");
+
+var totalSeconds = 0;
+var secondsElapsed = 0;
+var index = 0;
+var interval;
+
+//start of timer
+function getFormattedMinutes() {
+    //
+    var secondsLeft = totalSeconds - secondsElapsed;
+  
+    var minutesLeft = Math.floor(secondsLeft / 60);
+  
+    var formattedMinutes;
+  
+    if (minutesLeft < 10) {
+      formattedMinutes = "0" + minutesLeft;
+    } else {
+      formattedMinutes = minutesLeft;
+    }
+  
+    return formattedMinutes;
+  }
+  
+  function getFormattedSeconds() {
+    var secondsLeft = (totalSeconds - secondsElapsed) % 60;
+  
+    var formattedSeconds;
+  
+    if (secondsLeft < 10) {
+      formattedSeconds = "0" + secondsLeft;
+    } else {
+      formattedSeconds = secondsLeft;
+    }
+  
+    return formattedSeconds;
+  }
+
+  function setTime() {
+    var minutes;
+      minutes = 2
+  
+    clearInterval(interval);
+    totalSeconds = minutes * 60;
+  }
+
+  function renderTime() {
+    // When renderTime is called it sets the textContent for the timer html...
+    minutesDisplay.textContent = getFormattedMinutes();
+    secondsDisplay.textContent = getFormattedSeconds();
+  
+   // ..and then checks to see if the time has run out
+    if (secondsElapsed >= totalSeconds) {
+      if (totalSeconds === 0 && minutes === 0) {
+        alert("Time's Up");
+      }
+  
+      stopTimer();
+    }
+  }
+
+  function startTimer() {
+    setTime();
+        interval = setInterval(function() {
+          secondsElapsed++;
+          renderTime();
+        }, 1000);
+    } 
+  
+    function stopTimer() {
+      secondsElapsed = 0;
+      setTime();
+      renderTime();
+    }
+
+playButton.addEventListener("click", startTimer);
+// end of timer
+
 
 var questionsArray=[
     {
