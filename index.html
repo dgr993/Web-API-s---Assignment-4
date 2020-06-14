@@ -17,6 +17,13 @@
     <div class="timeAndScore d-flex justify-content-between ">
         <p class="scorePtag">Score Goes Here</p>
         <p class="timePtag">Timer Goes Here</p>
+        <div class="controls">
+            <div class="status"><span id="status"></span></div>
+            <div class="time">
+                <div id="minutes">2</div>
+                <div id="seconds">00</div>
+            </div>
+        </div>
     </div>
 
     <div class="container">
@@ -28,13 +35,18 @@
                 <hr class="my-4">
                 <p>Click the button to start the test</p>
                 <a class="btn btn-primary btn-lg startBtn" href="#" role="button">Start</a>
+                <div class="buttons">
+                    <button aria-label="play" id="play">
+                        <i class="fa fa-play" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
         </div>
 
         <div class=" questionsDiv">
-            <div class="appendHere">
-                <div class="row">
-                    <h1 class="questions col-12">Questions here</h1>
+            <div class="appendHere answerBtn">
+                <div class="row ">
+                    <h1 class="questions col-12 ">Questions here</h1>
                 </div>
             </div>
         </div>
