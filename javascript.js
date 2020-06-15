@@ -7,6 +7,7 @@ var answerBtn = document.querySelector(".answerBtn");
 var playButton = document.querySelector("#play");
 var minutesDisplay = document.querySelector("#minutes");
 var secondsDisplay = document.querySelector("#seconds");
+var row = document.querySelector(".row")
 
 var totalSeconds = 0;
 var secondsElapsed = 0;
@@ -99,7 +100,7 @@ var questionsArray=[
     },
     {
         question:"What is an h3 tag?",
-        options:["or not","please erase", "thisis the answer"],
+        options:["or not","please erase", "this is the answer"],
         answer:"big size for header"
     },
     {
@@ -150,15 +151,18 @@ function showQuestions(){
         button.setAttribute("class","btn btn-primary answerBtn col-12")
         button.setAttribute("type","button")
         button.textContent =questionsArray[index].options[i]
-        myDiv.appendChild(button)
+        myDiv.appendChild(button);
         
     }
-    appendHere.appendChild(myDiv)
+   
+    appendHere.appendChild(myDiv);
 }
+
 answerBtn.addEventListener("click", function(){
     
-    alert("this is the answer")
+    alert(questionsArray[index].answer[i]);
     index++;
+    appendHere.innerHTML = "";
     showQuestions();
 });
 
