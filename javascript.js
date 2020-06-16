@@ -1,6 +1,6 @@
-var welcomDiv= document.querySelector(".welcomePage");
+var welcomDiv = document.querySelector(".welcomePage");
 var questionsDiv = document.querySelector(".questionsDiv");
-var startBtn= document.querySelector(".startBtn");
+var startBtn = document.querySelector(".startBtn");
 var questionsH1 = document.querySelector(".questions");
 var appendHere = document.querySelector(".appendHere");
 var answerBtn = document.querySelector(".answerBtn");
@@ -8,11 +8,18 @@ var playButton = document.querySelector("#play");
 var minutesDisplay = document.querySelector("#minutes");
 var secondsDisplay = document.querySelector("#seconds");
 var row = document.querySelector(".row")
+var resultsDiv = document.querySelector(".resultsPage")
+var restartBtn = document.querySelector(".restartBtn");
+var results = document.querySelector(".results");
+var numbercorrect=0;
+var highscores = document.querySelector(".scorePtag")
+var highscoresDiv = document.querySelector(".highscores")
 
 var totalSeconds = 0;
 var secondsElapsed = 0;
 var index = 0;
 var interval;
+var i = 0;
 
 //start of timer
 function getFormattedMinutes() {
@@ -21,7 +28,7 @@ function getFormattedMinutes() {
   
     var minutesLeft = Math.floor(secondsLeft / 60);
   
-    var formattedMinutes;
+    // var formattedMinutes;
   
     if (minutesLeft < 10) {
       formattedMinutes = "0" + minutesLeft;
@@ -29,7 +36,7 @@ function getFormattedMinutes() {
       formattedMinutes = minutesLeft;
     }
   
-    //return formattedMinutes;
+    // return formattedMinutes;
   }
   
   function getFormattedSeconds() {
@@ -62,10 +69,26 @@ function getFormattedMinutes() {
    // ..and then checks to see if the time has run out
     if (secondsElapsed >= totalSeconds) {
       if (totalSeconds === 0 && minutes === 0) {
-        alert("Time's Up");
+        
+        
       }
   
       stopTimer();
+      alert("Time's Up");
+      questionsDiv.style.display= "none";
+
+      resultsDiv.style.display= "block";
+      results.textContent= numbercorrect;
+
+      //tried to have a reset test button but couldnt figure it out
+/*
+      restartBtn.addEventListener("click", startTimer);
+      restartBtn.addEventListener("click", function(){
+        welcomDiv.style.display="none"
+        questionsDiv.style.display= "block"
+        showQuestions();
+    });
+*/
     }
   }
 
@@ -128,16 +151,24 @@ var questionsArray=[
         options:["big size for header","like field", "return field"],
         answer:"big size for header"
     }
+    
 ]
+totalSeconds -=60;
+questionsDiv.style.display= "none";
+resultsDiv.style.display= "none";
+highscoresDiv.style.display= "none";
 
-questionsDiv.style.display= "none"
-
+highscores.addEventListener("click", function(){
+  welcomDiv.style.display="none"
+  questionsDiv.style.display= "none"
+  highscoresDiv.style.display= "block"
+});
 
 startBtn.addEventListener("click", function(){
     welcomDiv.style.display="none"
     questionsDiv.style.display= "block"
-    showQuestions()
-})
+    showQuestions();
+});
 
 
 function showQuestions(){
@@ -146,12 +177,17 @@ function showQuestions(){
     var myDiv= document.createElement("div")
     myDiv.setAttribute("class","row")
 
-    for (var i=0;i<questionsArray[index].options.length; i++){
+    for (i=0;i<questionsArray[index].options.length; i++){
         var button =document.createElement("button")
         button.setAttribute("class","btn btn-primary answerBtn col-12")
         button.setAttribute("type","button")
         button.textContent =questionsArray[index].options[i]
         myDiv.appendChild(button);
+        console.log(i);
+        console.log(questionsArray.length);
+        // if (i = questionsArray[index].options.length){
+        //   totalSeconds=0;
+        // }
         
     }
    
@@ -163,6 +199,8 @@ answerBtn.addEventListener("click", function(event){
     if (event.target.innerText == questionsArray[index].answer){
 
     alert("Correct");
+    numbercorrect++;
+    
   }
 
     else {
@@ -170,9 +208,8 @@ answerBtn.addEventListener("click", function(event){
     //minus 10 seconds from clock
     //totalSeconds = totalSeconds-10;
     totalSeconds-=10;
-   
-  };
 
+  };
     index++;
     appendHere.innerHTML = "";
     showQuestions();
