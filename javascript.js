@@ -79,6 +79,9 @@ function getFormattedMinutes() {
 
       resultsDiv.style.display= "block";
       results.textContent= numbercorrect;
+     
+      localStorage.setItem("numbercorrect", JSON.stringify(numbercorrect));
+      highscoresDiv = JSON.parse(localStorage.getItem("numbercorrect"));
 
       //tried to have a reset test button but couldnt figure it out
 /*
@@ -172,6 +175,7 @@ startBtn.addEventListener("click", function(){
 
 
 function showQuestions(){
+  
     questionsH1.textContent= questionsArray[index].question
 
     var myDiv= document.createElement("div")
@@ -185,13 +189,16 @@ function showQuestions(){
         myDiv.appendChild(button);
         console.log(i);
         console.log(questionsArray.length);
-        // if (i = questionsArray[index].options.length){
-        //   totalSeconds=0;
-        // }
         
-    }
-   
+       
+    };
+    
     appendHere.appendChild(myDiv);
+    
+    //go to results page when end of questions
+    /*if (index = questionsArray.length){
+      totalSeconds=0;
+    };*/
 }
 
 answerBtn.addEventListener("click", function(event){
