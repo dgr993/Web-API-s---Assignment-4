@@ -101,7 +101,7 @@ var questionsArray=[
     {
         question:"What is an h3 tag?",
         options:["or not","please erase", "this is the answer"],
-        answer:"big size for header"
+        answer:"or not"
     },
     {
         question:"What is an h4 tag?",
@@ -158,12 +158,22 @@ function showQuestions(){
     appendHere.appendChild(myDiv);
 }
 
-answerBtn.addEventListener("click", function(){
-    
-    alert(questionsArray[index].answer[i]);
+answerBtn.addEventListener("click", function(event){
+
+    if (event.target.innerText == questionsArray[index].answer){
+
+    alert("Correct");
+  }
+
+    else {
+    alert("wrong answer")
+    //minus 10 seconds from clock
+    //totalSeconds = totalSeconds-10;
+    totalSeconds-=10;
+   
+  };
+
     index++;
     appendHere.innerHTML = "";
     showQuestions();
 });
-
-// event listern to answerBtn , and when clicked you want to add to index , and run show questions function again
