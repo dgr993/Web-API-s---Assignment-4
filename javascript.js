@@ -240,7 +240,7 @@ answerBtn.addEventListener("click", function(event){
     alert("wrong answer")
     //minus 10 seconds from clock
     //totalSeconds = totalSeconds-10;
-    totalSeconds-=10;
+    totalSeconds-=60;
 
   };
     index++;
