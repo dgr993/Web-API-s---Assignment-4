@@ -97,7 +97,7 @@ function getFormattedMinutes() {
       resultsDiv.style.display= "block";
       results.textContent= numbercorrect;
      
-      
+     
       highscoresDiv = JSON.parse(localStorage.getItem("numbercorrect"));
       submitBtn.addEventListener("click", function(e) {
         e.preventDefault();
@@ -155,45 +155,31 @@ startBtn.addEventListener("click", startTimer);
 
 var questionsArray=[
     {
-        question:"What is a self closing tag?",
-        options:["<img>","<h1>"],
+        question:"Who invented JavaScript?",
+        options:["Douglas Crockford","Sheryl Sandberg","Brendan Eich"],
+        answer:"Brendan Eich"
+    },
+    {
+        question:"What is an h1 tag?",
+        options:["<h1>","<div>", "<script>"],
+        answer:"<h1>"
+    },
+    {
+        question:"Which is a self closing tag?",
+        options:["<img>","<h3>", "<h1>"],
         answer:"<img>"
     },
     {
-        question:"What is an h1 tag?",
-        options:["big size for header","like field", "return field"],
-        answer:"big size for header"
+        question:"Which one of these is a JavaScript package manager?",
+        options:["Node.js","TypeScript", "npm"],
+        answer:"npm"
     },
     {
-        question:"What is an h3 tag?",
-        options:["or not","please erase", "this is the answer"],
-        answer:"or not"
-    },
-    {
-        question:"What is an h4 tag?",
-        options:["Okay","yep", "weird"],
-        answer:"big size for header"
-    },
-    {
-        question:"What is an h5 tag?",
-        options:["oh my","test", "this"],
-        answer:"big size for header"
-    },
-    {
-        question:"What is an h1 tag?",
-        options:["big size for header","like field", "return field"],
-        answer:"big size for header"
-    },
-    {
-        question:"What is an h1 tag?",
-        options:["big size for header","like field", "return field"],
-        answer:"big size for header"
-    },
-    {
-        question:"What is an h1 tag?",
-        options:["big size for header","like field", "return field"],
-        answer:"big size for header"
+        question:"Which tool can you use to ensure code quality?",
+        options:["Angular","jQuery", "RequireJS","ESLint"],
+        answer:"ESLint"
     }
+  
     
 ]
 totalSeconds -=60;
@@ -254,7 +240,7 @@ answerBtn.addEventListener("click", function(event){
     alert("wrong answer")
     //minus 10 seconds from clock
     //totalSeconds = totalSeconds-10;
-    totalSeconds-=60;
+    totalSeconds-=10;
 
   };
     index++;
