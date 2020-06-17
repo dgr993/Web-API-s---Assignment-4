@@ -9,7 +9,7 @@ var minutesDisplay = document.querySelector("#minutes");
 var secondsDisplay = document.querySelector("#seconds");
 var row = document.querySelector(".row")
 var resultsDiv = document.querySelector(".resultsPage")
-var restartBtn = document.querySelector(".restartBtn");
+var submitBtn = document.querySelector(".submitBtn");
 var results = document.querySelector(".results");
 var numbercorrect=0;
 var highscores = document.querySelector(".scorePtag")
@@ -20,8 +20,25 @@ var secondsElapsed = 0;
 var index = 0;
 var interval;
 var i = 0;
+var scoreList = [];
 
 //start of timer
+
+if (localStorage.getItem("key")) {
+  scoreList = JSON.parse(localStorage.getItem("key"))
+
+}
+function showScores() {
+  highscoresDiv.innerHTML = "";
+  for (var i = 0; i < scoreList.length; i++) {
+      console.log("HERE:", scoreList[i][0] + scoreList[i][1])
+      var par = document.createElement("p");
+      par.innerText = scoreList[i][0] + " " + scoreList[i][1]
+      highscoresDiv.appendChild(par)
+  }
+}
+
+showScores()
 function getFormattedMinutes() {
     //
     var secondsLeft = totalSeconds - secondsElapsed;
@@ -74,19 +91,42 @@ function getFormattedMinutes() {
       }
   
       stopTimer();
-      alert("Time's Up");
+      // alert("Time's Up");
       questionsDiv.style.display= "none";
 
       resultsDiv.style.display= "block";
       results.textContent= numbercorrect;
      
-      localStorage.setItem("numbercorrect", JSON.stringify(numbercorrect));
+      
       highscoresDiv = JSON.parse(localStorage.getItem("numbercorrect"));
+      submitBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        var userint = initials.value
+        
+
+        console.log("hey")
+        localStorage.setItem("numbercorrect", JSON.stringify(numbercorrect));
+        if (userint.length > 2 || initials.value.length == 0) {
+          alert("You need at most two characters")
+      }
+      else {
+        var p = [userint, numbercorrect];
+        console.log("P:", p)
+        scoreList.push(p)
+        localStorage.setItem("key", JSON.stringify(scoreList));
+        showScores();
+        
+    }
+    highscoresDiv.appendChild(submitBtn)
+    
+});
+
+      
 
       //tried to have a reset test button but couldnt figure it out
 /*
-      restartBtn.addEventListener("click", startTimer);
-      restartBtn.addEventListener("click", function(){
+      
+      submitBtn.addEventListener("click", function(){
         welcomDiv.style.display="none"
         questionsDiv.style.display= "block"
         showQuestions();
@@ -214,7 +254,7 @@ answerBtn.addEventListener("click", function(event){
     alert("wrong answer")
     //minus 10 seconds from clock
     //totalSeconds = totalSeconds-10;
-    totalSeconds-=10;
+    totalSeconds-=60;
 
   };
     index++;
