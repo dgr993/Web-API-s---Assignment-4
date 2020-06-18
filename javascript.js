@@ -20,6 +20,7 @@ var secondsElapsed = 0;
 var index = 0;
 var interval;
 var i = 0;
+var g = 1;
 var scoreList = [];
 
 //start of timer
@@ -188,51 +189,54 @@ resultsDiv.style.display= "none";
 highscoresDiv.style.display= "none";
 
 highscores.addEventListener("click", function(){
-  welcomDiv.style.display="none"
-  questionsDiv.style.display= "none"
+  welcomDiv.style.display="none";
+  questionsDiv.style.display= "none";
+  resultsDiv.style.display= "none";
   highscoresDiv.style.display= "block"
 });
 
 startBtn.addEventListener("click", function(){
-    welcomDiv.style.display="none"
-    questionsDiv.style.display= "block"
+    welcomDiv.style.display="none";
+    questionsDiv.style.display= "block";
     showQuestions();
 });
 
 
 function showQuestions(){
-  
+   
+    
     questionsH1.textContent= questionsArray[index].question
 
     var myDiv= document.createElement("div")
     myDiv.setAttribute("class","row")
-
+    
     for (i=0;i<questionsArray[index].options.length; i++){
         var button =document.createElement("button")
         button.setAttribute("class","btn btn-primary answerBtn col-12")
         button.setAttribute("type","button")
         button.textContent =questionsArray[index].options[i]
         myDiv.appendChild(button);
-        console.log(i);
-        console.log(questionsArray.length);
-        
-       
+    
     };
     
     appendHere.appendChild(myDiv);
     
-    //go to results page when end of questions
-    /*if (index = questionsArray.length){
-      totalSeconds=0;
-    };*/
+    
+    console.log(g)
+    console.log (questionsArray.length)
+    
 }
 
 answerBtn.addEventListener("click", function(event){
-
+  if (g===questionsArray.length){
+    console.log(questionsArray.length)
+    totalSeconds=0;
+  }
     if (event.target.innerText == questionsArray[index].answer){
 
     alert("Correct");
     numbercorrect++;
+    g++;
     
   }
 
@@ -240,10 +244,11 @@ answerBtn.addEventListener("click", function(event){
     alert("wrong answer")
     //minus 10 seconds from clock
     //totalSeconds = totalSeconds-10;
-    totalSeconds-=60;
+    totalSeconds-=20;
+    g++;
 
   };
     index++;
     appendHere.innerHTML = "";
-    showQuestions();
+    return showQuestions();
 });
