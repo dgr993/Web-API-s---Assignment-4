@@ -14,13 +14,14 @@ var results = document.querySelector(".results");
 var numbercorrect=0;
 var highscores = document.querySelector(".scorePtag")
 var highscoresDiv = document.querySelector(".highscores")
+var initials = document.querySelector("#initials");
 
 var totalSeconds = 0;
 var secondsElapsed = 0;
 var index = 0;
 var interval;
 var i = 0;
-var g = 1;
+var g = 0;
 var scoreList = [];
 
 //start of timer
@@ -96,17 +97,21 @@ function getFormattedMinutes() {
       questionsDiv.style.display= "none";
 
       
-     
-      const numbercorrect = JSON.parse(localStorage.getItem("numbercorrect"));
+      
+      var numbercorrect = JSON.parse(localStorage.getItem("numbercorrect"));
+      
       resultsDiv.style.display= "block";
-      results.textContent= numbercorrect;
+      results.textContent = numbercorrect;
+
       submitBtn.addEventListener("click", function(e) {
+        console.log('something')
         e.preventDefault();
         var userint = initials.value
         
 
         console.log("hey")
-        localStorage.setItem("numbercorrect", JSON.stringify(numbercorrect));
+        console.log(userint)
+        
         if (userint.length > 2 || initials.value.length == 0) {
           alert("You need at most two characters")
       }
@@ -114,7 +119,7 @@ function getFormattedMinutes() {
         var p = [userint, numbercorrect];
         console.log("P:", p)
         scoreList.push(p)
-        localStorage.setItem("key", JSON.stringify(scoreList));
+        localStorage.setItem("numbercorrect", JSON.stringify(scoreList));
         showScores();
         
     }
@@ -228,10 +233,7 @@ function showQuestions(){
 }
 
 answerBtn.addEventListener("click", function(event){
-  if (g===questionsArray.length){
-    console.log(questionsArray.length)
-    totalSeconds=0;
-  }
+  
     if (event.target.innerText == questionsArray[index].answer){
 
     alert("Correct");
@@ -244,11 +246,22 @@ answerBtn.addEventListener("click", function(event){
     alert("wrong answer")
     //minus 10 seconds from clock
     //totalSeconds = totalSeconds-10;
-    totalSeconds-=20;
+    totalSeconds-=60;
     g++;
 
   };
+
+  if (g===questionsArray.length){
+    totalSeconds=0;
+  }
+  else {
     index++;
+    console.log(questionsArray.length)
     appendHere.innerHTML = "";
-    return showQuestions();
+    showQuestions();
+
+  }
+    
+    
+    
 });
