@@ -94,11 +94,11 @@ function getFormattedMinutes() {
       // alert("Time's Up");
       questionsDiv.style.display= "none";
 
+      
+     
+      const numbercorrect = JSON.parse(localStorage.getItem("numbercorrect"));
       resultsDiv.style.display= "block";
       results.textContent= numbercorrect;
-     
-     
-      highscoresDiv = JSON.parse(localStorage.getItem("numbercorrect"));
       submitBtn.addEventListener("click", function(e) {
         e.preventDefault();
         var userint = initials.value
