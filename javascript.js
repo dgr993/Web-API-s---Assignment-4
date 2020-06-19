@@ -26,8 +26,8 @@ var scoreList = [];
 
 //start of timer
 
-if (localStorage.getItem("key")) {
-  scoreList = JSON.parse(localStorage.getItem("key"))
+if (localStorage.getItem("scoreList")) {
+  scoreList = JSON.parse(localStorage.getItem("scoreList"))
 
 }
 function showScores() {
@@ -98,7 +98,7 @@ function getFormattedMinutes() {
 
       
       
-      var numbercorrect = JSON.parse(localStorage.getItem("numbercorrect"));
+      
       
       resultsDiv.style.display= "block";
       results.textContent = numbercorrect;
@@ -115,15 +115,18 @@ function getFormattedMinutes() {
         if (userint.length > 2 || initials.value.length == 0) {
           alert("You need at most two characters")
       }
+      else if(highscoresDiv.style.display=== "block"){
+        window.location.reload();
+       }
       else {
         var p = [userint, numbercorrect];
         console.log("P:", p)
         scoreList.push(p)
-        localStorage.setItem("numbercorrect", JSON.stringify(scoreList));
+        localStorage.setItem("scoreList", JSON.stringify(scoreList));
         showScores();
         
     }
-    highscoresDiv.appendChild(submitBtn)
+   
     
 });
 
